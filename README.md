@@ -81,7 +81,7 @@ Wannahaves:
 
 -   Ability for a plugin store, linked to this repo, so you can easily
     add/remove plugins.
-
+-   Language Support for English, Russian, Dutch and Polish to begin with.
  
 
 PiDash is based on Python3, Qt5 and PyQt5. It runs on any device supporting
