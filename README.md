@@ -222,9 +222,10 @@ exec /usr/bin/X -s 0 dpms -nocursor -nolisten tcp "$@"
 In my case I needed to do some extra locale setting
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-locale-gen en_US en_US.UTF-8 ru_RU ru_RU.UTF-8
-# above does not seem to work, locale dafults to en_GB, so in t
-dpkg-reconfigure
+# locale-gen en_US en_US.UTF-8 ru_RU ru_RU.UTF-8
+# dpkg-reconfigure
+# above does not seem to work (anymore), locale dafults to en_GB, so 
+# we need to configure the ones we need in raspi-config
 
 nano ~/.bashrc
 #insert at the end:
