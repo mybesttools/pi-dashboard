@@ -1,0 +1,17 @@
+<widget name='gcal_page' initsize='800,480'>
+    <vframe name='gcal' showif='gcal.enabled'>
+      <vframe name='header' dblclick='plugins.gcal.open_gcal'>
+        <label name='header_title' text='Google Calendar'/>
+        <label name='header_subtitle' text='Next Event: {{gcal.next}}'/>
+      </vframe>
+      <vframe name='body'>
+        <vframe name='body_row' iter='gcal.events' itermax='6'>
+          <hframe>
+            <label name='gcal_bullet' text='⚫' style='color:{{this.color}};'/>
+            <label name='body_label' text='{{this.title}}'/>
+            <label name='body_value' text='{{this.start|gcal_dtstr}}' align='right'/>
+          </hframe>
+        </vframe>
+      </vframe>
+    </vframe>
+</widget>

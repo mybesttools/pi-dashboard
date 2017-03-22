@@ -1,0 +1,36 @@
+<widget name='network_page' initsize='800,480'>
+  <vframe name='network' showif='network.enabled and network.nics'>
+      <hframe name='header'>
+        <vframe>
+          <label name='header_title' text='Network'/>
+          <label name='header_subtitle' text='{{externalip.ip}}'/>
+        </vframe>
+        <vframe name='header_chartwrap'>
+          <linechart name='header_chart' values='{{network.total.bytes_recv_per_sec|default:0}},{{network.total.bytes_sent_per_sec|default:0}}' colors='#4E9A06,#A40000' minmax='100000'/>
+        </vframe>
+      </hframe>
+      <vframe name='network_body'>
+        <vframe iter='network.nics'>
+          <vframe name='network_nic'
+            tooltip='{span style="font-size:12px; font-weight:bold; color:#bbb;"}{{this.iface|network_friendly_iface}}{/span}: {{this.iface}}
+              {div style="white-space:pre;"}Broadcast: {{this.broadcast}}{/div}
+              {div style="white-space:pre;"}Netmask: {{this.netmask}}{/div}'>
+            <hframe name='body_row'>
+              <label name='body_value' text='{{this.iface|network_friendly_iface}}:'/>
+              <label name='body_value' text='{{this.addr}}' align='right'/>
+            </hframe>
+            <hframe name='body_row'>
+              <label name='body_label' text='  Upload:'/>
+              <label name='body_value' text='{{this.bytes_sent_per_sec|bytes_to_str}}/s' align='right'/>
+              <label name='network_upload' text='{{this.bytes_sent|bytes_to_str}} ▴' align='right'/>
+            </hframe>
+            <hframe name='body_row'>
+              <label name='body_label' text='  Download:'/>
+              <label name='body_value' text='{{this.bytes_recv_per_sec|bytes_to_str}}/s' align='right'/>
+              <label name='network_download' text='{{this.bytes_recv|bytes_to_str}} ▾' align='right'/>
+            </hframe>
+          </vframe>
+        </vframe>
+      </vframe>
+    </vframe>
+</widget>

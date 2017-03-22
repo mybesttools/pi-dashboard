@@ -1,0 +1,17 @@
+/**
+ * Clock (copied to init.css
+ **/
+#clock {
+  padding: 5px 5px;
+}
+#clock_bignum {
+  font-size: 54px;
+  text-align: right;
+}
+#clock_smallnums {
+  padding: 11px 0px 9px 8px;
+}
+#clock_smallnums > QLabel {
+  max-height: 12px;
+  min-height: 12px;
+}

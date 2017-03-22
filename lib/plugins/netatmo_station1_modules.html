@@ -1,0 +1,97 @@
+<widget name='station1' initsize='800,480'>
+    <vframe name='locations' showif='netatmo.enabled and netatmo.body.devices'>
+        <vframe name='weather'>
+            <hframe name='stations' iter='netatmo.body.devices' itermax='1' iterstart='0'>
+                <vframe>
+                    <label name='station_header' text='{{this.station_name}}' align='left' size='150,20'/>
+                    <groupbox name='spacer_box' size='150,270'/>
+                </vframe>
+                <hframe name='stations' iter='this.modules' itermax='4'>
+                    <groupbox name='group_box'  size='200,330'>
+                        <!--Any module-->
+                        <hframe name='netatmo_row'>
+                            <label name='module_name' text='{{this.module_name}}' align='left'/>
+                        </hframe>
+                        <spacing size='15'/>
+                        <hframe name='netatmo_row'>
+                            <vframe name='pre_icon' bgimage='fa.battery-three-quarters' bgsize='26,26' bgpos='left,top'/>
+                            <label name='mention' text='{{this.battery_percent}}%' align='left'/>
+                            <pbar name='power_bar' value='{{this.battery_percent|to_int}}' maximum='100' size='80,12'/>
+                        </hframe>
+                        <hframe name='netatmo_row'>
+                            <vframe name='pre_icon' bgimage='fa.wifi' bgsize='26,26' bgpos='left,top'/>
+                            <label name='mention' text='{{this.rf_status}}%' align='left'/>
+                            <pbar name='signal_bar' value='{{this.rf_status|to_int}}' maximum='100' size='80,12'/>
+                        </hframe>
+                        <!--NAModule1: Outside Module-->
+                        <hframe name='netatmo_row' show_when='{{this.type}}==NAModule1'>
+                             <vframe name='pre_icon' bgimage='wi.thermometer_exterior' bgsize='22,22' bgpos='left,top'/>
+                             <label name='measure' text='{{this.dashboard_data.Temperature|to_int}}°C'/>
+                             <label name='measure' text=' ' align='left'/>
+                        </hframe>
+                        <hframe name='netatmo_row' show_when='{{this.type}}==NAModule1'>
+                             <label name='measure' text='Min.'/>
+                             <label name='measure' text='{{this.dashboard_data.min_temp|to_int}}°C'/>
+                            <label name='measure' text=' ' align='left'/>
+                        </hframe>
+                        <hframe name='netatmo_row' show_when='{{this.type}}==NAModule1'>
+                             <label name='measure' text='Max.'/>
+                             <label name='measure' text='{{this.dashboard_data.max_temp|to_int}}°C'/>
+                            <label name='measure' text=' ' align='left'/>
+                        </hframe>
+                        <hframe name='netatmo_row' show_when='{{this.type}}==NAModule1'>
+                            <vframe name='pre_icon' bgimage='wi.humidity' bgsize='22,22' bgpos='left,top'/>
+                            <label name='measure' text='{{this.dashboard_data.Humidity|to_int}} %' align='left'/>
+                            <label name='measure' text=' ' align='left'/>
+                        </hframe>
+                        <!--NAModule2:Wind Gauge-->
+                        <hframe name='netatmo_row' show_when='{{this.type}}==NAModule2'>
+                             <vframe name='pre_icon' bgimage='wi.thermometer_exterior' bgsize='22,22' bgpos='left,top'/>
+                             <label name='measure' text='{{this.dashboard_data.Temperature|to_int}}°C'/>
+                             <label name='measure' text=' ' align='left'/>
+                        </hframe>
+                        <hframe name='netatmo_row' show_when='{{this.type}}==NAModule2'>
+                             <label name='measure' text='Min.'/>
+                             <label name='measure' text='{{this.dashboard_data.min_temp|to_int}}°C'/>
+                            <label name='measure' text=' ' align='left'/>
+                        </hframe>
+                        <hframe name='netatmo_row' show_when='{{this.type}}==NAModule2'>
+                             <label name='measure' text='Max.'/>
+                             <label name='measure' text='{{this.dashboard_data.max_temp|to_int}}°C'/>
+                            <label name='measure' text=' ' align='left'/>
+                        </hframe>
+                        <hframe name='netatmo_row' show_when='{{this.type}}==NAModule2'>
+                            <vframe name='pre_icon' bgimage='wi.humidity' bgsize='22,22' bgpos='left,top'/>
+                            <label name='measure' text='{{this.dashboard_data.Humidity|to_int}} %' align='left'/>
+                            <label name='measure' text=' ' align='left'/>
+                        </hframe>
+                        <!--NAModule3:Rain Gauge-->
+                        <hframe name='netatmo_row' show_when='{{this.type}}==NAModule3'>
+                            <vframe name='pre_icon' bgimage='wi.umbrella' bgsize='22,22' bgpos='left,top'/>
+                            <label name='measure' text='{{this.dashboard_data.Rain|round:2}} mm'/>
+                            <label name='measure' text=' ' align='left'/>
+                        </hframe>
+                        <hframe name='netatmo_row' show_when='{{this.type}}==NAModule3'>
+                            <vframe name='pre_icon' bgimage='wi.raindrop' bgsize='22,22' bgpos='left,top'/>
+                            <label name='measure' text='{{this.dashboard_data.sum_rain_1|round:2}} mm'/>
+                            <vframe name='pre_icon' bgimage='wi.time_1' bgsize='22,22' bgpos='left,top'/>
+                            <label name='mention' text='1h'/>
+                        </hframe>
+                        <hframe name='netatmo_row' show_when='{{this.type}}==NAModule3'>
+                            <vframe name='pre_icon' bgimage='wi.raindrops' bgsize='22,22' bgpos='left,top'/>
+                            <label name='measure' text='{{this.dashboard_data.sum_rain_24|round:2}} mm'/>
+                            <vframe name='pre_icon' bgimage='wi.time_12' bgsize='22,22' bgpos='left,top'/>
+                            <label name='mention' text='24h'/>
+                        </hframe>
+                        <hframe name='netatmo_row' show_when='{{this.type}}==NAModule3'>
+                            <label name='measure' text=' ' align='left'/>
+                            <label name='measure' text=' ' align='left'/>
+                            <label name='measure' text=' ' align='left'/>
+                        </hframe>
+                    </groupbox>
+                </hframe>
+            </hframe>
+            <hframe name='netatmo_logo' bgimage='plugin:/netatmo.png' bgsize='200,40' bgpos='right,bottom'/>
+        </vframe>
+    </vframe>
+</widget>

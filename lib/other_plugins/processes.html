@@ -1,0 +1,22 @@
+<widget name='processes_page' initsize='800,480'>
+    <vframe name='processes' showif='processes.enabled'>
+      <vframe name='header' dblclick='plugins.processes.open_system_monitor'>
+        <label name='header_title' text='Processes'/>
+        <label name='header_subtitle' text='{{processes.total}} processes'/>
+      </vframe>
+      <vframe name='body'>
+        <vframe name='body_row' iter='processes.procs' itermax='6'>
+          <hframe tooltip='{span style="font-size:12px; font-weight:bold; color:#bbb;"}{{this.name}}{/span}
+              {div style="white-space:pre;"}PID: {{this.pid}}{/div}
+              {div style="white-space:pre;"}Memory: {{this.memory_rss|bytes_to_str}}{/div}
+              {div style="white-space:pre;"}Runtime: {{this.create_time|timestamp_ago}}{/div}
+              {div style="white-space:pre;"}User: {{this.username}}{/div}
+              {div style="white-space:pre;"}Status: {{this.status}}{/div}'>
+            <label name='body_label' text='{{this.name}}'/>
+            <label name='proc_mem' text='{{this.memory_rss|bytes_to_str}}' align='right' dblclick='plugins.processes.sort_mem'/>
+            <label name='proc_cpu' text='{{this.cpu_percent|round}}%' align='right' dblclick='plugins.processes.sort_cpu'/>
+          </hframe>
+        </vframe>
+      </vframe>
+    </vframe>
+</widget>

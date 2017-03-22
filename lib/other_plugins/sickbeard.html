@@ -1,0 +1,16 @@
+<widget name='sickbeard_page' initsize='800,480'>
+    <vframe name='sickbeard' showif='sickbeard.enabled and sickbeard.shows'>
+      <vframe name='header' dblclick='plugins.sickbeard.open_sickbeard'>
+        <label name='header_title' text='Sickbeard'/>
+        <label name='header_subtitle' text='Coming Soon'/>
+      </vframe>
+      <vframe name='body'>
+        <vframe name='body_row' iter='sickbeard.shows' itermax='6'>
+          <hframe>
+            <label name='body_label' text='{{this.show_name}}'/>
+            <label name='body_value' text='{{this.datestr}}' align='right'/>
+          </hframe>
+        </vframe>
+      </vframe>
+    </vframe>
+</widget>

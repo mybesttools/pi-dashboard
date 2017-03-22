@@ -1,0 +1,19 @@
+/**
+ * Picasa
+ **/
+#picasa_image {
+  margin: 0px 3px 0px 3px;
+  padding: 2px;
+  background-color: rgba(0,0,0,0.3);
+  min-height: 125px;
+  max-height: 125px;
+  min-width: 169px;
+  max-width: 169px;
+}
+#picasa_title {
+  margin: 0px 3px 0px 3px;
+  padding: 2px;
+  background-color: rgba(0,0,0,0.16);
+  min-width: 170px;
+  max-width: 170px;
+}

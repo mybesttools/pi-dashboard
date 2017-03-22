@@ -1,0 +1,276 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+"""
+PiDashboard Desktop System Monitor
+Author: M. van der Sluis (02.2017)
+Derived from https://github.com/pkkid/pkmeter by M.Shepanski (pkkid)
+"""
+import json, os, pkgutil, signal
+import sys, threading, time
+from sys import version_info
+from argparse import ArgumentParser
+from collections import defaultdict
+from datetime import datetime
+from PyQt5 import QtCore, QtWidgets
+from xml.etree import ElementTree
+import qtawesome as qta
+
+# Add lib to sys.path if not already there. Useful when running
+# this application without officially installing it.
+if os.path.dirname(__file__) not in sys.path:
+    sys.path.append(os.path.dirname(__file__))
+
+from lib import PLUGINDIR, SHAREDIR, STATUSFILE, THEMEDIR  # noqa E402 -- module level import not at top of file
+from lib import log, pi_widgets, utils  # noqa E402
+from lib.about import AboutWindow  # noqa E402
+from lib.decorators import threaded_method  # noqa E402
+from lib.pi_config import PiConfig  # noqa E402
+
+
+class PiDashboard(QtCore.QObject):
+    """ Pi Dashboard Desktop System Monitor """
+    plugin_updated = QtCore.pyqtSignal(object)
+    signal_next_page = QtCore.pyqtSignal(object)
+
+    def __init__(self, opts):
+        super(PiDashboard, self).__init__()
+        ttf_file = 'weathericons-webfont.ttf'
+        json_file = 'weathericons-webfont-charmap.json'
+        qta.load_font('wi', ttf_file, json_file, os.path.join(SHAREDIR, 'font'))
+        self.qta = qta
+        log.setLevel(opts.loglevel)                            # Set the log level
+        log.debug(" python version " + str(version_info[0]) + "." + str(version_info[1]) + "." + str(version_info[2]))
+        self.opts = opts                                       # Command line options
+        self.theme = self._init_theme()                        # Bunch contains {name, dir}
+        self.rlock = threading.RLock()                         # Lock for updates
+        self.data = {}                                         # Cached data from all namespaces
+        self._init_search_path()                               # Init image resources
+        self.plugin_updated.connect(self.update)               # Plugin updated signal handler
+        self.signal_next_page.connect(self.next_page)          # Page turner signal handler
+        self.modules = self._load_modules()                    # Import all plugin logic
+        self.about = AboutWindow()                             # About Window
+        self.config = PiConfig(self)                           # Config Values and Window
+        self.plugin_widgets = self._init_plugin_widgets        # plugin widgets (pages)
+        self.plugins = self._init_plugins()                    # Init plugins (but do not start yet)
+        self.widgets = self._init_widgets()                    # List of PiDashboard pages
+        self.actions = self._init_actions()                    # actions to update (organized by namespace)
+        self._start_plugins()                                  # Start all required plugins
+        signal.signal(signal.SIGINT, self.quit)                # Quit on Ctrl+C
+
+    def _init_theme(self):
+        log.info('--- Starting Pi Dashboard ---')
+        theme = utils.Bunch()
+        theme.name = self.opts.theme.lower()
+        theme.dir = os.path.join(THEMEDIR, theme.name)
+        return theme
+
+    @staticmethod
+    def _init_search_path():
+        img_dir = os.path.join(SHAREDIR, 'img')
+        QtCore.QDir.addSearchPath('img', img_dir)
+        QtCore.QDir.addSearchPath('plugin', PLUGINDIR)
+
+    def _load_modules(self):
+        modules = {}
+        for loader, name, ispkg in pkgutil.iter_modules([PLUGINDIR]):
+            try:
+                log.info("Loading module %s", name)
+                module = loader.find_module(name).load_module(name)
+                namespace = utils.namespace(module)
+                modules[namespace] = module
+            except Exception as err:
+                log.warn('Error loading module %s: %s', name, err)
+                if self.opts.verbose:
+                    log.exception(err)
+        return modules
+
+    def _init_actions(self):
+        actions = defaultdict(list)
+        for widget in self.widgets:
+            for action in widget.actions:
+                if getattr(action, 'namespaces', None):
+                    for namespace in action.namespaces:
+                        log.info("Registering action %s for %s", action, namespace)
+                        actions[namespace].append(action)
+                elif getattr(action, 'namespace', None):
+                    log.info("Registering action %s for %s", action, action.namespace)
+                    actions[action.namespace].append(action)
+        for widget in self.plugin_widgets:
+            try:
+                for action in widget.actions:
+                    if getattr(action, 'namespaces', None):
+                        for namespace in action.namespaces:
+                            log.info("Registering action %s for %s", action, namespace)
+                            actions[namespace].append(action)
+                    elif getattr(action, 'namespace', None):
+                        log.info("Registering action %s for %s", action, action.namespace)
+                        actions[action.namespace].append(action)
+            except TypeError:
+                log.debug("cannot load for %s", widget)
+        return actions
+
+    def _init_plugins(self):
+        plugins = {}
+        for namespace, module in self.modules.items():
+            plugin_class = getattr(module, 'Plugin', None)
+            if plugin_class:
+                try:
+                    plugin = module.Plugin(self)
+                    log.info('Initializing plugin: %s', plugin.namespace)
+                    plugins[plugin.namespace] = plugin
+                except:
+                    log.exception('Error initializing plugin: %s', plugin)
+        return plugins
+
+    def _start_plugins(self):
+        for plugin in self.plugins.values():
+            plugin.start()
+
+    @property
+    def _init_plugin_widgets(self):
+        plugin_widgets = []
+        for namespace, module in self.modules.items():
+            plugin_class = getattr(module, 'Plugin', None)
+            if plugin_class:
+                plugin = module.Plugin(self)
+                plugin.enabled = self.config.get(plugin.namespace, 'enabled', True)
+                log.info("Loading plugin page for %s , enabled: %s", plugin.namespace, str(plugin.enabled))
+                style_path = os.path.join(PLUGINDIR, plugin.namespace + '.css')
+                if os.path.exists(style_path):
+                    with open(style_path) as handle:
+                        style = handle.read()
+                    layout_path = os.path.join(PLUGINDIR, plugin.namespace + '.html')
+                    if os.path.exists(layout_path):
+                        widget = self._get_widget(plugin, object_name=plugin.namespace, layout_path=layout_path, style=style)
+                        plugin_widgets.append(widget)
+                    else:
+                        log.debug("This plugin probably has more than one layout")
+                        for layout in plugin.layouts:
+                            log.debug("Loading layout " + layout)
+                            layout_path = os.path.join(PLUGINDIR, layout) + ".html"
+                            widget = self._get_widget(plugin, object_name=layout, layout_path=layout_path, style=style)
+                            plugin_widgets.append(widget)
+        return plugin_widgets
+
+    def _get_widget(self, plugin, object_name, layout_path, style):
+        with open(layout_path) as handle:
+            etree = ElementTree.fromstring('<root>%s</root>' % handle.read())
+        for e_widget in etree:
+            if e_widget.tag.lower() != 'widget':
+                log.warn('Top level layout tag must be widget not %s.' % e_widget.tag)
+                return
+            else:
+                widget = pi_widgets.PiPage(e_widget, style, self)
+                widget.setObjectName(object_name)
+                widget.setEnabled(plugin.enabled)
+
+                return widget
+
+    def _init_widgets(self):
+        widgets = []
+        style_path = os.path.join(self.theme.dir, 'style.css')
+        with open(style_path) as handle:
+            style = handle.read()
+        layout_path = os.path.join(self.theme.dir, 'layout.html')
+        with open(layout_path) as handle:
+            etree = ElementTree.fromstring('<root>%s</root>' % handle.read())
+        for e_widget in etree:
+            if e_widget.tag.lower() != 'widget':
+                raise Exception('Top level layout tag must be widget not %s.' % e_widget.tag)
+            widget = pi_widgets.PiDeskWidget(e_widget, style, self)
+            widget.setPosition('0,0')  # Force starting in top left
+            widget.setObjectName('main_window')
+            widgets.append(widget)
+            widget.show()
+            wdg = widget.findChild(pi_widgets.PiStackedWidget, 'stacked_widget')
+            # found the Stacked widget, now add the plugin pages...
+            for plugin_widget in self.plugin_widgets:
+                wdg.addWidget(plugin_widget)
+                plugin_widget.resize(wdg.minimumSizeHint())
+                plugin_widget.show()
+            widget.show()
+
+        return widgets
+
+    def _update_status_file(self):
+        ts = lambda d: int(time.mktime(d.timetuple())) if d else 'NA'
+        status = {p:ts(d.get('last-update')) for p,d in self.data.items() if p != 'this' and d.get('enabled')}
+        with open(STATUSFILE, 'w') as handle:
+            json.dump(status, handle, indent=2)
+
+    def resize_to_min(self):
+        for widget in self.widgets:
+            widget.resize(widget.minimumSizeHint())
+
+    @threaded_method
+    def reload(self):
+        log.debug('--- Reloading Pi Dashboard ---')
+        for plugin in self.plugins.values():
+            old_enabled = plugin.enabled
+            new_enabled = self.config.get(plugin.namespace, 'enabled', True)
+            if old_enabled != new_enabled:
+                # update page value
+                for widget in self.widgets:
+                    if widget.objectName() == 'main_window':
+                        wdg = widget.findChild(pi_widgets.PiStackedWidget, 'stacked_widget')
+                        if plugin.layouts:
+                            log.debug("loading sub-pages...")
+                            for layout in plugin.layouts:
+                                page = wdg.findChild(pi_widgets.PiPage, layout)
+                                log.debug("loading sub-page..." + layout)
+                                page.setEnabled(new_enabled)
+                        else:
+                            page = wdg.findChild(pi_widgets.PiPage, plugin.namespace)
+                            if page:
+                                page.setEnabled(new_enabled)
+
+                try:
+                    plugin.enable()
+                except:
+                    log.exception('Error reloading plugin: %s', plugin)
+                    plugin.disable()
+            else:
+                plugin.reload()
+
+    def update(self, plugin):
+        with self.rlock:
+            namespace = utils.namespace(plugin.__module__)
+            self.data[namespace] = plugin.data
+            self.data[namespace]['last-update'] = datetime.now()
+
+            # advance to next page if widget or plugin is not enabled
+            for widget in self.widgets:
+                if widget.objectName() == 'main_window':
+                    wdg = widget.findChild(pi_widgets.PiStackedWidget, 'stacked_widget')
+                    if not wdg.currentWidget().isEnabled():
+                        wdg.nextPage()
+
+            for action in self.actions[namespace]:
+                action.apply(self.data)
+            if namespace == 'clock' and int(time.time()) % 10 == 0:
+                self._update_status_file()
+
+    def next_page(self):
+        for widget in self.widgets:
+            if widget.objectName() == 'main_window':
+                wdg = widget.findChild(pi_widgets.PiStackedWidget, 'stacked_widget')
+                wdg.nextPage()
+
+    def quit(self, *args):
+        log.info('Quitting..')
+        self.config.save()
+        QtCore.QCoreApplication.quit()
+
+def start_dashboard(opts):
+    app = QtWidgets.QApplication(['PiDashboard'])
+    PiDashboard(opts)
+    app.exec_()
+
+
+if __name__ == '__main__':
+    parser = ArgumentParser(description='Pi Dash Desktop System Monitor')
+    parser.add_argument('--decorated', default=False, action='store_true', help='Decorate main window.')
+    parser.add_argument('--theme', default='default', help='Theme name to load.')
+    parser.add_argument('--loglevel', default='DEBUG', help='Set the log level (DEBUG, INFO, WARN, ERROR).')
+    opts = parser.parse_args()
+    start_dashboard(opts)

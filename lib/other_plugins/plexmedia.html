@@ -1,0 +1,16 @@
+<widget name='plexmedia_page' initsize='800,480'>
+    <vframe name='plexmedia' showif='plexmedia.enabled and plexmedia.videos'>
+      <vframe name='header'>
+        <label name='header_title' text='Plex Media'/>
+        <label name='header_subtitle' text='Recently Added'/>
+      </vframe>
+      <vframe name='body'>
+        <vframe name='body_row' iter='plexmedia.videos' itermax='6'>
+          <hframe>
+            <label name='body_label' text='{{this.title}}'/>
+            <label name='body_value' text='{{this.added|time_ago_short}} ago' align='right'/>
+          </hframe>
+        </vframe>
+      </vframe>
+    </vframe>
+</widget>

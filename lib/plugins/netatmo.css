@@ -1,0 +1,82 @@
+/**
+ * Netatmo
+ **/
+#station_header {
+    color: #4d97cc;
+    font-size: 16px;
+    min-height: 20px;
+    padding: 0px;
+}
+
+#device {
+    background-color: rgba(230, 230, 230, 1);
+}
+
+#group_box
+{
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+#groupbox #measure {
+    color: #ccc;
+    font-size: 12px;
+    min-height: 22px;
+    padding: 14px 1px 0px 2px;
+}
+
+#weather_today {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+#weather_location {
+    color: #ccc;
+    font-size: 11px;
+    height: 13px;
+    padding: 17px 0px 0px 2px;
+}
+#netatmo_row{
+    max-height:20px;
+}
+#measure {
+    color: #ccc;
+    font-size: 18px;
+    min-height: 18px;
+}
+
+#mod_name {
+    color: #ccc;
+    border: 1px solid gray;
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 14px 1px 0px 2px;
+}
+
+#outdoor_co2 {
+    color: #ccc;
+    font-size: 12px;
+    padding: 14px 2px 4px 4px;
+}
+
+#co2_bar {
+    padding: 12px 12px 12px 12px;
+}
+#weather_description {
+    color: #a7e4e7;
+    font-size: 10px;
+    padding: 0px 0px 17px 3px;
+}
+#weather_feelslike {
+    color: #888;
+    font-size: 10px;
+    padding: 0px 3px 17px 0px;
+}
+#icon {
+    min-height: 18px;
+    max-height: 25px;
+    color: ivory;
+}
+#forecast_weekday,
+#forecast_highlow {
+    font-size: 10px;
+}
+

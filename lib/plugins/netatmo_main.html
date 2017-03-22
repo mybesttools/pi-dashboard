@@ -1,0 +1,52 @@
+<widget name='netatmo_module' initsize='800,480'>
+    <vframe name='locations' showif='netatmo.enabled and netatmo.body.devices'>
+        <vframe name='weather'>
+            <hframe name='stations' iter='netatmo.body.devices' itermax='4'>
+                <groupbox name='group_box' size='360,330'>
+                     <hframe name='netatmo_row'>
+                        <label name='module_name' text='{{this.station_name}} - {{this.module_name}}' align='left'/>
+                    </hframe>
+                    <spacing size='15'/>
+                    <hframe name='netatmo_row'>
+                        <vframe name='pre_icon' bgimage='wi.volcano' bgsize='26,26' bgpos='left,top'/>
+                        <label name='measure' text=' {{this.dashboard_data.CO2|to_int}} ppm' align='left'/>
+                        <label name='measure' text=' ' align='left'/>
+                    </hframe>
+                    <hframe name='netatmo_row'>
+                        <pbar name='co2_bar' value='{{this.dashboard_data.CO2|to_int}}' degrading="true" maximum='2000' size='300,12'/>
+                    </hframe>
+                     <hframe>
+                         <vframe name='pre_icon' bgimage='wi.thermometer_internal' bgsize='22,22' bgpos='left,top'/>
+                         <label name='measure' text='{{this.dashboard_data.Temperature|to_int}}°C'/>
+                         <label name='measure' text=' ' align='left'/>
+                    </hframe>
+                    <hframe>
+                         <label name='measure' text='Min.'/>
+                         <label name='measure' text='{{this.dashboard_data.min_temp|to_int}}°C'/>
+                        <label name='measure' text=' ' align='left'/>
+                    </hframe>
+                    <hframe>
+                         <label name='measure' text='Max.'/>
+                         <label name='measure' text='{{this.dashboard_data.max_temp|to_int}}°C'/>
+                        <label name='measure' text=' ' align='left'/>
+                    </hframe>
+                    <hframe name='netatmo_row'>
+                        <vframe name='pre_icon' bgimage='wi.humidity' bgsize='22,22' bgpos='left,top'/>
+                        <label name='measure' text='{{this.dashboard_data.Humidity|to_int}} %' align='left'/>
+                        <label name='measure' text=' ' align='left'/>
+                    </hframe>
+                    <hframe name='netatmo_row'>
+                        <vframe name='pre_icon' bgimage='wi.barometer' bgsize='22,22' bgpos='left,top'/>
+                        <label name='measure' text='{{this.dashboard_data.Pressure|to_int}} mbar' align='left'/>
+                        <label name='measure' text=' ' align='left'/>
+                    </hframe>
+                    <hframe name='netatmo_row'>
+                        <vframe name='pre_icon' bgimage='fa.bullhorn' bgsize='22,22' bgpos='left,top'/>
+                        <label name='measure' text='{{this.dashboard_data.Noise|to_int}} db' align='left'/>
+                        <label name='measure' text=' ' align='left'/>
+                    </hframe>
+                </groupbox>
+            </hframe>
+        </vframe>
+    </vframe>
+</widget>

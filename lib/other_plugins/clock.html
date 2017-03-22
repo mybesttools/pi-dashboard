@@ -1,0 +1,13 @@
+<message text="copied to the weather undergound page">
+    <widget name='clock_page' initsize='800,480'>
+        <hframe name='clock' showif='clock.enabled'>
+            <stretch/>
+            <label name='clock_bignum' text='{{clock.datetime|format_date:"%-d %b %Y"}}' align='left'/>
+            <vframe name='clock_smallnums'>
+                <label text='{{clock.datetime|format_date:"%A"}}'/>
+                <label text='{{clock.datetime|format_date:"%-I:%M:%S %p"|lower}}'/>
+            </vframe>
+            <stretch/>
+        </hframe>
+    </widget>
+</message>

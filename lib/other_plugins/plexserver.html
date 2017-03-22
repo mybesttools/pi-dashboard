@@ -1,0 +1,24 @@
+<widget name='plexserver_page' initsize='800,480'>
+  <vframe name='plexserver' showif='plexserver.enabled and plexserver.videos'>
+    <vframe name='header'>
+      <label name='header_title' text='Plex Server'/>
+      <label name='header_subtitle' text='{{plexserver.videos|length}} stream{{plexserver.videos|length|pluralize}}'/>
+    </vframe>
+    <vframe name='plexserver_body'>
+      <vframe iter='plexserver.videos'>
+        <hframe name='plexserver_item'>
+          <vframe name='plexserver_thumb'>
+            <vframe bgimage='{{this.thumb}}' bgpos='center,center' bgsize='fit'/>
+          </vframe>
+          <vframe>
+            <label name='plexserver_title' text='{{this.title}}'/>
+            <label name='plexserver_position' text='{{this.viewoffset|plexserver_length}} of {{this.duration|plexserver_length}} ({{this.percent}}%)'/>
+            <label name='plexserver_player' text='{{this.player}}'/>
+            <label name='plexserver_user' text='{{this.user}}'/>
+            <stretch/>
+          </vframe>
+        </hframe>
+      </vframe>
+    </vframe>
+  </vframe>
+</widget>

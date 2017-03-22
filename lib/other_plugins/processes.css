@@ -1,0 +1,15 @@
+/**
+ * Processes
+ **/
+#proc_mem {
+  color: #aaa;
+  font-size: 10px;
+  padding: 0px 3px 0px 0px;
+}
+#proc_cpu {
+  color: #aaa;
+  font-size: 10px;
+  padding: 0px 3px 0px 0px;
+  min-width: 30px;
+  max-width: 30px;
+}

@@ -19,7 +19,7 @@ Netatmo Data Example
 			}, 
 			'devices': [
 			{
-				'friend_users': ['5863e89aac34a57b5d8b46ec', '5537546a1b7759af308b47e3'], 
+				'friend_users': ['5863e89aac34a56b6d7b46ec', '4436546a1b7759af308b47e3'],
 				'dashboard_data': 
 				{
 					'date_max_temp': 1489753926, 
@@ -53,7 +53,7 @@ Netatmo Data Example
 				}, 
 				'last_status_store': 1489756670, 
 				'firmware': 124, 
-				'cipher_id': 'enc:16:TxwBugJxTrvch8TkYEC0+eSxC2EW2PEQdcR5F5T/c5H0vEkZ8Uo//NvXZXuEmsi4', 
+				'cipher_id': 'enc:16:TxwBUGJxTrvch8TkYEC0+eSxC2EW2PEQdcR5F5T/c5H0vEkZ8Uo//NvXZXuEmsi4',
 				'data_type': ['Temperature', 'CO2', 'Humidity', 'Noise', 'Pressure'], 
 				'modules': [
 				{
@@ -116,7 +116,7 @@ Netatmo Data Example
 					'timezone': 'Europe/Berlin'}, 
 					'last_status_store': 1489756161, 
 					'firmware': 124, 
-					'cipher_id': 'enc:16:WuakXlMBKmY/blffeUcXzffWOfmHhuqh3XPWd7j4YI4+68tq6l0Rx2if3FB5pA5P', 
+					'cipher_id': 'enc:16:WuakXlMBKmY/blffeUcXzffWOFFmHhuqh3XPWd7j4YI4+68tq6l0Rx2if3FB5pA5P',
 					'data_type': ['Temperature', 'CO2', 'Humidity', 'Noise', 'Pressure'], 
 					'modules': [
 					{

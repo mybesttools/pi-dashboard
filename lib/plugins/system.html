@@ -1,0 +1,52 @@
+<widget name='system_page' initsize='800,480'>
+  <vframe name='system' showif='system.enabled'>
+    <hframe name='header' dblclick='plugins.system.open_system_monitor'>
+      <vframe>
+        <label name='header_title' text='System'/>
+        <label name='header_subtitle' text='{{system.hostname}}'/>
+      </vframe>
+      <vframe name='header_chartwrap'>
+        <linechart name='header_chart' values='{{system.cpu_percent}}' minmax='50' colors='#e7b21f'/>
+      </vframe>
+    </hframe>
+    <vframe name='body'>
+      <!-- cpu usage and up-time -->
+      <hframe name='body_chartrow'>
+        <vframe>
+          <hframe name='body_row'>
+            <label name='body_label' text='CPU Usage:'/>
+            <label name='body_value' text='{{system.cpu_percent|to_int}}%' align='left'/>
+          </hframe>
+          <hframe name='body_row'>
+            <label name='body_label' text='CPU Up-time:'/>
+            <label name='body_value' text='{{system.uptime|to_int|seconds_to_str}}' align='left'/>
+          </hframe>
+        </vframe>
+        <vframe name='body_chartwrap'>
+          <vbarchart name='header_chart' values='{{system.cpu_percents|join}}' colors='#e7b21f'/>
+        </vframe>
+        <vframe size='300,100'/>
+      </hframe>
+      <!-- mem used and mem free -->
+        <hframe name='body_chartrow'>
+            <vframe>
+              <hframe name='body_row'>
+                <label name='body_label' text='Mem Used:'/>
+                <label name='body_value' text='{{system.memory.percent|to_int}}%' align='left'/>
+              </hframe>
+              <hframe name='body_row'>
+                <label name='body_label' text='Mem Free:'/>
+                <label name='body_value' text='{{system.memory.free|bytes_to_str:1}}' align='left'/>
+              </hframe>
+            </vframe>
+            <vframe name='body_chartwrap'>
+                <piechart name='header_chart' values='{{system.memory.percent|default:0}},{{system.memory.cached_percent|default:0}}' colors='#e7b21f,#ffffff26'/>
+            </vframe>
+            <vframe size='300,100'/>
+
+        </hframe>
+        <!-- mem used and mem free -->
+    </vframe>
+  </vframe>
+</widget>
+

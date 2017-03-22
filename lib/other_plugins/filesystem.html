@@ -1,0 +1,36 @@
+<widget name='filesystem_page' initsize='800,480'>
+    <vframe name='filesystem' showif='filesystem.enabled'>
+      <hframe name='header'>
+        <vframe>
+          <label name='header_title' text='File Systems'/>
+          <label name='header_subtitle' text='IO: {{filesystem.io.io_per_sec|bytes_to_str}}/s'/>
+        </vframe>
+        <vframe name='header_chartwrap'>
+          <linechart name='header_chart' values='{{filesystem.io.io_per_sec}}' colors='#e7b21f' minmax='100000'/>
+        </vframe>
+      </hframe>
+      <vframe name='filesystem_body'>
+        <vframe iter='filesystem.disks'>
+          <hframe name='filesystem_disk'
+            tooltip='{span style="font-size:12px; font-weight:bold; color:#bbb;"}{{this.mountpoint|filesystem_friendly_name}}{/span}: {{this.fstype}}
+              {div style="white-space:pre;"}Path: {{this.mountpoint}}{/div}
+              {div style="white-space:pre;"}Device: {{this.device}}{/div}
+              {div style="white-space:pre;"}Opts: {{this.opts}}{/div}'>
+            <vframe>
+              <hframe name='body_row'>
+                <label name='body_value' text='{{this.mountpoint|filesystem_friendly_name}}:'/>
+                <label name='body_value' text='{{this.used|bytes_to_str:1}} /' align='right'/>
+              </hframe>
+              <hframe name='body_row'>
+                <label name='body_label' text='{{this.percent|to_int}}%'/>
+                <label name='body_value' text='{{this.total|bytes_to_str:1}}' align='right'/>
+              </hframe>
+            </vframe>
+            <vframe name='body_chartwrap'>
+              <piechart name='header_chart' values='{{this.percent}}' colors='#e7b21fdd'/>
+            </vframe>
+          </hframe>
+        </vframe>
+      </vframe>
+    </vframe>
+  </widget>

@@ -1,0 +1,92 @@
+/**
+ * Wunderground
+ **/
+#group_box
+{
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+#weather_today {
+  width: 800px;
+  height: 200px;
+  background-color: rgba(0,0,0,0.3);
+}
+#weather_location {
+    color: #e7b21f;
+    text-align: center;
+    font-size: 18px;
+    max-height: 20px;
+    margin: 10px 10px 10px 10px;
+}
+#weather_temp {
+    color: #ccc;
+    font-size: 17px;
+    max-height: 17px;
+    margin: 10px 10px 10px 10px;
+}
+#weather_description {
+  color: #e7b21f;
+  font-size: 18px;
+  max-height: 20px;
+  min-height: 20px;
+  margin: 10px 10px 10px 10px;
+}
+#weather_feelslike {
+    color: #888;
+    font-size: 10px;
+    max-height: 12px;
+    min-height: 12px;
+    padding: 0px 3px 17px 0px;
+}
+#pre_icon{
+    max-width: 26px;
+    max-height: 26px;
+    min-width: 26px;
+    min-height: 26px;
+    padding: 15px 15px 15px 15px;
+}
+
+#measure {
+    color: #ccc;
+    font-size: 18px;
+    min-height: 20px;
+    max-height: 20px;
+    max-width: 150px;
+    min-width: 150px;
+}
+#pre_text{
+    color: #ccc;
+    font-size: 18px;
+    min-height: 20px;
+    max-height: 20px;
+    max-width: 50px;
+}
+#placeholder{
+    max-height: 16px;
+    max-width: 16px;
+}
+#day_text{
+
+    font-size: 18px;
+    max-width: 150px;
+    text-align:left;
+    padding: 0;
+}
+
+#forecast_icon {
+  min-height: 100px;
+  max-height: 100px;
+  padding: 15px 15px 15px 15px;
+}
+#forecast_day{
+
+    padding: 10px 10px 10px 10px;
+}
+#forecast_weekday,
+#forecast_highlow {
+        border: 1px solid gray;
+    border-radius: 10px;
+  font-size: 10px;
+}
+

@@ -1,0 +1,28 @@
+/**
+ * PlexServer
+ **/
+#plexserver_body {
+  padding: 5px 0px 5px 0px;
+}
+#plexserver_item {
+  margin-bottom: 5px;
+}
+#plexserver_thumb {
+  margin: 2px 5px 0px 5px;
+  padding: 2px;
+  background-color: rgba(0,0,0,0.3);
+  min-height: 45px;
+  max-height: 45px;
+  min-width: 30px;
+  max-width: 30px;
+}
+#plexserver_title {
+  color: #aaa;
+  font-size: 10px;
+}
+#plexserver_position,
+#plexserver_player,
+#plexserver_user {
+  color: #888;
+  font-size: 10px;
+}

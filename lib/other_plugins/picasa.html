@@ -1,0 +1,28 @@
+<widget name='picasa_page' initsize='800,480'>
+  <vframe name='picasa' showif='picasa.enabled'>
+    <vframe name='header' dblclick='plugins.picasa.open_albums'>
+      <label name='header_title' text='Photoalbum'/>
+      <label name='header_subtitle' text='{{picasa.albums|length}} albums'/>
+    </vframe>
+    <vframe name='body' dblclick='plugins.picasa.open_current_image'
+      tooltip='{span style="font-size:12px; font-weight:bold; color:#bbb;"}Photo Details{/span}
+        {div style="white-space:pre;"}Date Taken: {{picasa.photo.timestamp|format_timestamp}}{/div}
+        {div style="white-space:pre;"}Dimensions: {{picasa.photo.width}} x {{picasa.photo.height}}{/div}
+        {div style="white-space:pre;"}File name: {{picasa.photo.title}}{/div}
+        {div style="white-space:pre;"}File size: {{picasa.photo.size|bytes_to_str}}{/div}
+        {div style="white-space:pre;"}Camera: {{picasa.photo.model}}{/div}
+        {div style="white-space:pre;"}Focal Length: {{picasa.photo.focallength}}{/div}
+        {div style="white-space:pre;"}Exposure: {{picasa.photo.exposure|to_fraction}}{/div}
+        {div style="white-space:pre;"}F Number: f/{{picasa.photo.fstop}}{/div}
+        {div style="white-space:pre;"}ISO: {{picasa.photo.iso}}{/div}
+        {div style="white-space:pre;"}Flash: {{picasa.photo.flash}}{/div}'>
+      <vframe name='picasa_image'>
+        <vframe bgimage='{{picasa.photo.url}}' bgpos='center,center' bgsize='fit' bgfade='1'/>
+      </vframe>
+      <vframe name='picasa_title'>
+        <label name='body_value' text='{{picasa.album.title|default:" "}}' align='center'/>
+        <label name='body_label' text='{{picasa.album.date|default:" "}}' align='center'/>
+      </vframe>
+    </vframe>
+  </vframe>
+</widget>

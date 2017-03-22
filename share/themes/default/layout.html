@@ -1,0 +1,21 @@
+<widget name='main_page' initsize='800,480'>
+  <vframe name='container'>
+      <!-- Clock -->
+      <hframe name='clock' showif='clock.enabled'>
+          <stretch/>
+            <label name='clock_bignums' text='{{clock.datetime|format_date:"%-d"}}' align='center'/>
+            <vframe name='clock_smallnums'>
+                <label name='clock_smallnums' text='{{clock.datetime|format_date:"%b %Y"}}'/>
+                <label name='clock_smallnums' text='{{clock.datetime|format_date:"%A"}}'/>
+            </vframe>
+            <vframe name='clock_time'>
+                <label name='clock_time' text='{{clock.datetime|format_date:"%-H:%M"|lower}}' align='center'/>
+            </vframe>
+          <stretch/>
+        </hframe>
+        <!--stacked widgets (pages) -->
+        <stack name="stacked_widget" initsize='800,480' size='800,400'></stack>
+        <hframe name='pager'><page-turner name='page-turner' active="{{page_turner.active}}"/></hframe>
+  </vframe>
+</widget>
+

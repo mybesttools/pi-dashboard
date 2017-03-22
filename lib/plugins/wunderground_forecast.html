@@ -1,0 +1,36 @@
+<widget name='wunderground_page' initsize='800,480'>
+    <vframe name='weather' showif='wunderground.enabled and wunderground.current_observation'>
+        <vframe name='body_s'>
+            <hframe name='forecast' iter='wunderground.forecast.simpleforecast.forecastday' itermax='7' iterstart='2'>
+                <vframe name='forecast_day'>
+                    <label style="font-size:18px; font-weight:bold; color:#bbb;" text='{{this.date.weekday}}' align='center'/>
+                    <vframe name='forecast_icon' bgimage='img:weather/colorful/{{this.icon|wunderground_iconcode}}.png' bgsize='100,100' bgpos='center,center'/>
+                    <hframe>
+                        <vframe name='forecast_pre_icon' bgimage='wi.thermometer' bgsize='22,22' bgpos='left,center'/>
+                        <label name='day_text' text='{{this.high.celsius}}°C/{{this.low.celsius}}°C' align='left'/>
+                    </hframe>
+                    <hframe>
+                        <vframe name='forecast_pre_icon' bgimage='wi.strong_wind' bgsize='22,22' bgpos='left,center'/>
+                        <label name='day_text' text='{{this.avewind.kph}} km/h' align='left'/>
+                    </hframe>
+                    <hframe>
+                        <vframe name='forecast_pre_icon' bgimage='wi.wind_direction' bgsize='22,22' bgpos='left,center'/>
+                        <label name='day_text' text='{{this.avewind.dir}}' align='left'/>
+                    </hframe>
+                    <hframe>
+                        <vframe name='forecast_pre_icon' bgimage='wi.humidity' bgsize='22,22' bgpos='left,center'/>
+                        <label name='day_text' text='{{this.avehumidity}}%' align='left'/>
+                    </hframe>
+                    <hframe>
+                        <vframe name='forecast_pre_icon' bgimage='wi.sunrise' bgsize='22,22' bgpos='left,center'/>
+                        <label name='day_text' text='{{wunderground.moon_phase.sunrise.hour}}:{{wunderground.moon_phase.sunrise.minute}}' align='left'/>
+                    </hframe>
+                    <hframe>
+                        <vframe name='forecast_pre_icon' bgimage='wi.sunset' bgsize='22,22' bgpos='left,center'/>
+                        <label name='day_text' text='{{wunderground.moon_phase.sunset.hour}}:{{wunderground.moon_phase.sunset.minute}}' align='left'/>
+                    </hframe>
+                </vframe>
+          </hframe>
+        </vframe>
+    </vframe>
+</widget>

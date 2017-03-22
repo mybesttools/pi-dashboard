@@ -1,0 +1,116 @@
+/*---------------------------------------------------------------------
+ * Default Default Theme Styles
+ * http://qt-project.org/doc/qt-5/stylesheet-reference.html
+ *--------------------------------------------------------------------*/
+* {
+  background-color: rgba(10,10,10,255);
+  padding: 0px;
+  margin: 0px;
+  border-width: 0px;
+  color: #aaa;
+  font-family: ubuntu;
+  font-weight: 500;
+}
+QMenu {
+  background-color: rgba(0,0,0,0);
+  border: 1px solid #444;
+  border-radius: 2px;
+  color: #aaa;
+}
+QMenu::item {
+  background-color: rgba(50,50,50,0.8);
+}
+QMenu::item:selected {
+  background: #444;
+  color: #ccc;
+}
+QToolTip {
+  background-color: #282828;
+  border: 1px solid #444;
+  border-radius: 3px;
+  color: #aaa;
+  font-size: 10px;
+}
+
+QGroupBox:title{
+  subcontrol-origin: margin;
+  subcontrol-position: top center;
+  padding: 0 3px 0 3px;
+}
+
+#container {
+  background-color: rgba(0,0,0,0.2);
+  min-width: 800px;
+  max-width: 800px;
+  max-height: 480px;
+  min-height: 480px;
+}
+
+/**
+ * Header
+ **/
+#header {
+  background-color: rgba(0,0,0,0.3);
+}
+#header_title {
+  padding: 3px 0px 0px 2px;
+  max-height: 13px;
+  min-height: 13px;
+}
+#header_subtitle {
+  color: #e7b21f;
+  font-size: 10px;
+  max-height: 12px;
+  min-height: 12px;
+  padding: 0px 0px 3px 3px;
+}
+#header_chartwrap {
+  margin: 3px;
+}
+/**
+ * Clock
+ **/
+#clock {
+  padding: 5px 5px;
+}
+#clock_time {
+  font-size: 54px;
+  text-align: right;
+  padding: 0px 0px 0px 50px;
+}
+#clock_bignums {
+  font-size: 54px;
+  text-align: right;
+}
+#clock_smallnums {
+  font-size: 14px;
+  text-align: right;
+  padding: 2px 0px 0px 0px;
+}
+#clock_smallnums > QLabel {
+  max-height: 14px;
+  min-height: 14px;
+}
+
+/**
+ * Body
+ **/
+#body {
+  padding: 5px 0px 10px 0px;
+}
+#body_label {
+  color: #888;
+  font-size: 10px;
+  padding: 0px 3px;
+}
+#body_value {
+  color: #aaa;
+  font-size: 10px;
+  padding: 0px 3px;
+}
+#body_chartwrap {
+  min-width: 32px;
+  max-width: 32px;
+  margin: 3px 3px 1px 3px;
+}
+

@@ -1,0 +1,64 @@
+<vframe>
+  <!-- Enable -->
+  <vframe id='controlgroup_enabled' name='controlgroup'>
+    <hframe>
+      <label name='label' text='Enabled:'/>
+      <toggleswitch id='enabled'/>
+      <stretch/>
+    </hframe>
+  </vframe>
+  <!-- Update Interval -->
+  <vframe id='controlgroup_interval' name='controlgroup'>
+    <hframe>
+      <label name='label' text='Interval:'/>
+      <QLineEdit id='interval' name='input_small'/>
+      <label id='status_interval' name='status'/>
+      <stretch/>
+    </hframe>
+    <label id='help_interval' name='help' wrap='true' text='Seconds between plugin updates.'/>
+  </vframe>
+  <!-- client id -->
+  <vframe id='controlgroup_client_id' name='controlgroup'>
+    <hframe>
+      <label name='label' text='Client ID:'/>
+      <QLineEdit id='client_id' name='input_large'/>
+      <label id='status_client_id' name='status'/>
+      <stretch/>
+    </hframe>
+    <label id='help_client_id' name='help' wrap='true'
+      text='If you do not have an API (client) id, you can get one from https://dev.netatmo.com/dev/createanapp'/>
+  </vframe>
+  <!-- client secret -->
+  <vframe id='controlgroup_query' name='controlgroup'>
+    <hframe>
+      <label name='label' text='Client Secret:'/>
+      <QLineEdit id='client_secret' name='input_large'/>
+      <label id='status_client_secret' name='status'/>
+      <stretch/>
+    </hframe>
+    <label id='help_client_secret' name='help' wrap='true'
+           text='If you do not have an API (client) id, you can get one from https://dev.netatmo.com/dev/createanapp'/>
+  </vframe>
+  <!--  username -->
+  <vframe id='controlgroup_username' name='controlgroup'>
+    <hframe>
+      <label name='label' text='Username:'/>
+      <QLineEdit id='username' name='input_large'/>
+      <label id='status_username' name='status'/>
+      <stretch/>
+    </hframe>
+    <label id='help_username' name='help' wrap='true'
+      text='Enter your Netatmo username'/>
+  </vframe>
+  <!-- password-->
+  <vframe id='controlgroup_password' name='controlgroup'>
+    <hframe>
+      <label name='label' text='Password:'/>
+      <QLineEdit id='password' name='input_xlarge' echo='passwordechoonedit'/>
+      <label id='status_password' name='status'/>
+      <stretch/>
+    </hframe>
+    <label id='help_password' name='help' wrap='true'
+      text='Enter your Netatmo password'/>
+  </vframe>
+</vframe>

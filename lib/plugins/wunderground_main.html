@@ -1,0 +1,64 @@
+<widget name='wunderground_page' initsize='800,480'>
+    <vframe name='weather' showif='wunderground.enabled and wunderground.current_observation'>
+        <hframe name='weather_today' bgimage='img:weather/colorful/{{wunderground.current_observation.icon|wunderground_iconcode}}.png' bgpos='center,center'>
+            <!--
+            {div style="white-space:pre;"}Temp: {{wunderground.current_observation.temp_c|to_int}}°C ({{wunderground.current_observation.temp_c|to_int}}°C){/div}
+            {div style="white-space:pre;"}Wind: {{wunderground.current_observation.wind_mph}} mph {{wunderground.current_observation.wind_dir}}{/div}
+            {div style="white-space:pre;"}Visibility: {{wunderground.current_observation.visibility_mi}} mi{/div}
+            {div style="white-space:pre;"}Humidity: {{wunderground.current_observation.relative_humidity}}{/div}
+            {div style="white-space:pre;"}Pressure: {{wunderground.current_observation.pressure_in}}{{wunderground.current_observation.pressure_trend}} in{/div}
+            {div style="white-space:pre;"}Sunrise: {{wunderground.moon_phase.sunrise.hour}}:{{wunderground.moon_phase.sunrise.minute}} AM{/div}
+            {div style="white-space:pre;"}Sunset: {{wunderground.moon_phase.sunset.hour|mod_12}}:{{wunderground.moon_phase.sunset.minute}} PM{/div}
+            {div style="white-space:pre;"}Updated: {{wunderground.current_observation.local_epoch|format_timestamp:"%b %-d %-I:%M %p"}}{/div}'>
+            -->
+            <vframe iter='wunderground.forecast.simpleforecast.forecastday' itermax='1' iterstart='0'>
+                <hframe>
+                    <groupbox name='group_box' size='260,330'>
+                        <hframe>
+                             <vframe name='pre_icon' bgimage='wi.thermometer_exterior' bgsize='26,26' bgpos='left,center'/>
+                             <label name='measure' text='{{wunderground.current_observation.temp_c|to_int}}°C' align='left'/>
+                        </hframe>
+                        <hframe>
+                             <vframe name='pre_icon' bgimage='fa.user-plus' bgsize='26,26' bgpos='left,center'/>
+                             <label name='measure' text='{{wunderground.current_observation.feelslike_c|to_int}}°C' align='left'/>
+                        </hframe>
+                        <hframe>
+                             <label name='pre_text' text='Min.'/>
+                             <label name='measure' text='{{this.low.celsius|to_int}}°C' align='left'/>
+                        </hframe>
+                        <hframe>
+                             <label name='pre_text' text='Max.'/>
+                             <label name='measure' text='{{this.high.celsius|to_int}}°C' align='left'/>
+                        </hframe>
+                    </groupbox>
+                    <vframe>
+                        <label name='weather_location' text='{{wunderground.current_observation.display_location.city}}' align='center'/>
+                        <label name='weather_description' text='Today - {{wunderground.current_observation.weather}}' align='center'/>
+                        <label name='placeholder' text=' '/>
+                        <vframe name='forecast_icons' bgimage='img:weather/colorful/{{this.icon|wunderground_iconcode}}.png' bgsize='200,200' bgpos='center,center'/>
+                        <label name='placeholder' text=' '/>
+                    </vframe>
+                    <groupbox name='group_box' size='260,330'>
+                        <hframe name='wunderground_row'>
+                            <vframe name='pre_icon' bgimage='wi.barometer' bgsize='22,22' bgpos='left,center'/>
+                            <label name='measure' text='{{wunderground.current_observation.pressure_mb|to_int}} mbar' align='left'/>
+                        </hframe>
+                        <hframe name='wunderground_row'>
+                            <vframe name='pre_icon' bgimage='wi.strong_wind' bgsize='26,26' bgpos='left,top'/>
+                            <label name='measure' text='{{wunderground.current_observation.wind_kph}} km/h' align='left'/>
+                        </hframe>
+                        <hframe name='wunderground_row'>
+                            <vframe name='pre_icon' bgimage='wi.wind_direction' bgsize='26,26' bgpos='left,center'/>
+                            <label name='measure' text='{{wunderground.current_observation.wind_dir}}' align='left'/>
+                        </hframe>
+                        <hframe name='wunderground_row'>
+                            <vframe name='pre_icon' bgimage='wi.humidity' bgsize='26,26' bgpos='left,center'/>
+                            <label name='measure' text='{{wunderground.current_observation.relative_humidity|to_int}} %' align='left'/>
+                        </hframe>
+                    </groupbox>
+                </hframe>
+            </vframe>
+        </hframe>
+
+    </vframe>
+</widget>

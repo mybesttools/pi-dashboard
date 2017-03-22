@@ -1,0 +1,17 @@
+/**
+ * Network
+ **/
+#network_body {
+  padding: 5px 0px 5px 0px;
+}
+#network_nic {
+  margin-bottom: 5px;
+}
+#network_upload,
+#network_download {
+  color: #aaa;
+  font-size: 10px;
+  padding: 0px 3px;
+  min-width: 45px;
+  max-width: 45px;
+}
