@@ -1,0 +1,262 @@
+Netatmo Data Example
+
+{
+'time_exec': 0.053349018096924, 
+'body': {
+			'user': 
+			{
+				'administrative': 
+				{
+					'country': 'DE', 
+					'pressureunit': 0, 
+					'windunit': 2, 
+					'reg_locale': 'en-US', 
+					'feel_like_algo': 0, 
+					'lang': 'en-US', 
+					'unit': 0
+				}, 
+				'mail': 'mike@mybesttools.net'
+			}, 
+			'devices': [
+			{
+				'friend_users': ['5863e89aac34a57b5d8b46ec', '5537546a1b7759af308b47e3'], 
+				'dashboard_data': 
+				{
+					'date_max_temp': 1489753926, 
+					'max_temp': 22.5, 
+					'pressure_trend': 'stable', 
+					'date_min_temp': 1489708729, 
+					'min_temp': 21.5, 
+					'AbsolutePressure': 991.6, 
+					'CO2': 464, 
+					'Humidity': 28, 
+					'time_utc': 1489756655, 
+					'temp_trend': 'stable', 
+					'Noise': 36, 
+					'Temperature': 22.5, 
+					'Pressure': 1009
+				}, 
+				'co2_calibrating': False, 
+				'last_upgrade': 1485767601, 
+				'last_setup': 1482654376, 
+				'_id': '70:ee:50:19:20:a2', 
+				'station_name': 'Moskwa', 
+				'type': 'NAMain', 
+				'date_setup': 1482654376, 
+				'place': 
+				{
+					'city': 'Moskva', 
+					'location': [37.4573276, 55.776816], 
+					'country': 'RU', 
+					'altitude': 147, 
+					'timezone': 'Europe/Moscow'
+				}, 
+				'last_status_store': 1489756670, 
+				'firmware': 124, 
+				'cipher_id': 'enc:16:TxwBugJxTrvch8TkYEC0+eSxC2EW2PEQdcR5F5T/c5H0vEkZ8Uo//NvXZXuEmsi4', 
+				'data_type': ['Temperature', 'CO2', 'Humidity', 'Noise', 'Pressure'], 
+				'modules': [
+				{
+					'dashboard_data': 
+					{
+					'Humidity': 64, 
+					'date_max_temp': 1489752708, 
+					'max_temp': 9.5, 
+					'time_utc': 1489756655, 
+					'date_min_temp': 1489720511, 
+					'min_temp': -2.1, 
+					'Temperature': 8.6, 
+					'temp_trend': 'down'
+					}, 
+					'last_seen': 1489756655, 
+					'battery_vp': 5822, 
+					'rf_status': 74, 
+					'last_setup': 1482654403, 
+					'last_message': 1489756668, 
+					'_id': '02:00:00:19:36:b0', 
+					'module_name': 'Wyjściowy', 
+					'type': 'NAModule1', 
+					'firmware': 44, 
+					'battery_percent': 93, 
+					'data_type': ['Temperature', 'Humidity']
+				}], 
+				'wifi_status': 57, 
+				'module_name': 'Domowy'
+			}, 
+			{
+				'dashboard_data': 
+				{
+					'date_max_temp': 1489742893, 
+					'max_temp': 22.7, 
+					'pressure_trend': 'up', 
+					'date_min_temp': 1489707951, 
+					'min_temp': 20, 
+					'AbsolutePressure': 1013, 
+					'CO2': 515, 
+					'Humidity': 45, 
+					'time_utc': 1489756147, 
+					'temp_trend': 'stable', 
+					'Noise': 48, 
+					'Temperature': 22, 
+					'Pressure': 1015
+				}, 
+				'co2_calibrating': False, 
+				'last_upgrade': 1440398378, 
+				'last_setup': 1429689564, 
+				'_id': '70:ee:50:12:b3:c0', 
+				'station_name': 'Bedburg-Hau', 
+				'type': 'NAMain', 
+				'read_only': True, 
+				'date_setup': 1429689564, 
+				'place': 
+				{
+					'city': 'Bedburg', 
+					'location': [6.1946513, 51.7620071], 
+					'country': 'DE', 'altitude': 17, 
+					'timezone': 'Europe/Berlin'}, 
+					'last_status_store': 1489756161, 
+					'firmware': 124, 
+					'cipher_id': 'enc:16:WuakXlMBKmY/blffeUcXzffWOfmHhuqh3XPWd7j4YI4+68tq6l0Rx2if3FB5pA5P', 
+					'data_type': ['Temperature', 'CO2', 'Humidity', 'Noise', 'Pressure'], 
+					'modules': [
+					{
+						'dashboard_data': 
+						{
+							'Humidity': 50, 
+							'date_max_temp': 1489705241, 
+							'max_temp': 12.2, 
+							'time_utc': 1489756126, 
+							'date_min_temp': 1489734131, 
+							'min_temp': 9.4, 
+							'Temperature': 11.2, 
+							'temp_trend': 'up'
+						}, 
+						'last_seen': 1489756126, 
+						'battery_vp': 4478, 
+						'rf_status': 78, 
+						'last_setup': 1429690495, 
+						'last_message': 1489756158, 
+						'_id': '02:00:00:12:6b:e2', 
+						'module_name': 'Wyjściowy', 
+						'type': 'NAModule1', 
+						'firmware': 44, 
+						'battery_percent': 37, 
+						'data_type': ['Temperature', 'Humidity']
+					}, 
+					{
+						'dashboard_data': 
+						{
+							'Rain': 0, 
+							'sum_rain_24': 0.101, 
+							'sum_rain_1': 0, 
+							'time_utc': 1489756138
+						}, 
+						'last_seen': 1489756151, 
+						'battery_vp': 5918, 
+						'rf_status': 120, 
+						'last_setup': 1482836107, 
+						'last_message': 1489756158, 
+						'_id': '05:00:00:03:33:a8', 
+						'module_name': 'Deszcz', 
+						'type': 'NAModule3', 
+						'firmware': 8, 
+						'battery_percent': 97, 
+						'data_type': ['Rain']
+					}, 
+					{
+						'dashboard_data': 
+						{
+							'date_max_temp': 1489705241, 
+							'WindAngle': 279, 
+							'max_temp': 0, 
+							'max_wind_str': 26, 
+							'GustStrength': 14, 
+							'WindHistoric': [
+							{
+								'WindAngle': 287, 
+								'time_utc': 1489752833, 
+								'WindStrength': 5
+							}, 
+							{
+								'WindAngle': 297, 
+								'time_utc': 1489753134, 
+								'WindStrength': 4
+							}, 
+							{
+								'WindAngle': 288, 
+								'time_utc': 1489753435, 
+								'WindStrength': 5
+							}, 
+							{
+								'WindAngle': 291, 
+								'time_utc': 1489753736, 
+								'WindStrength': 8
+							}, 
+							{
+								'WindAngle': 287, 
+								'time_utc': 1489754036, 
+								'WindStrength': 6
+							}, 
+							{
+								'WindAngle': 280, 
+								'time_utc': 1489754338, 
+								'WindStrength': 5
+							}, 
+							{
+								'WindAngle': 290, 
+								'time_utc': 1489754639, 
+								'WindStrength': 6
+							}, 
+							{
+								'WindAngle': 289, 
+								'time_utc': 1489754940, 
+								'WindStrength': 7
+							}, 
+							{
+								'WindAngle': 286, 
+								'time_utc': 1489755241, 
+								'WindStrength': 5
+							}, 
+							{
+								'WindAngle': 294, 
+								'time_utc': 1489755542, 
+								'WindStrength': 4
+							}, 
+							{
+								'WindAngle': 289, 
+								'time_utc': 1489755844, 
+								'WindStrength': 4
+							}, 
+							{
+								'WindAngle': 279, 
+								'time_utc': 1489756145, 
+								'WindStrength': 4
+							}], 
+							'date_min_temp': 1489746506, 
+							'min_temp': -0.7, 
+							'WindStrength': 4, 
+							'GustAngle': 306, 
+							'time_utc': 1489756145, 
+							'max_wind_angle': 288, 
+							'date_max_wind_str': 1489754036
+						}, 
+						'last_seen': 1489756158, 
+						'battery_vp': 5760, 
+						'rf_status': 72, 
+						'last_setup': 1482836146, 
+						'last_message': 1489756158, 
+						'_id': '06:00:00:01:d5:0c', 
+						'module_name': 'Wiatr', 
+						'type': 'NAModule2', 
+						'firmware': 17, 
+						'battery_percent': 88, 
+						'data_type': ['Wind']
+					}
+			], 
+							'wifi_status': 69, 
+							'module_name': 'Domowy'
+			}]
+		}, 
+		'time_server': 1489756787, 
+		'status': 'ok'
+	}
